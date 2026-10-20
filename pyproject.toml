@@ -21,7 +21,7 @@ classifiers = [
     "Operating System :: OS Independent",
 ]
 dependencies = [
-    "anthropic>=0.75",
+    "anthropic>=1.0",
     "fastapi>=0.110",
     "pydantic>=2.6",
     "sqlglot>=25.0",

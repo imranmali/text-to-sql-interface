@@ -299,7 +299,7 @@ def test_empty_result_warning(detector: HallucinationDetector) -> None:
         "How many orders were placed?",
         "What is the total revenue?",
         "what's the average price",
-        "What is the total number of customers per city?",
+        "What is the total number of customers?",
     ],
 )
 def test_unexpected_shape_for_single_aggregate(
@@ -315,6 +315,22 @@ def test_result_checks_pass_for_plausible_results(detector: HallucinationDetecto
     assert detector.check_result("How many orders were placed?", single) == []
     many = QueryResult(columns=["name"], rows=[["a"], ["b"]], row_count=2)
     assert detector.check_result("List all product names", many) == []
+
+
+@pytest.mark.parametrize(
+    "question",
+    [
+        "How many orders per status?",
+        "What is the total number of customers per city?",
+        "How many products by category?",
+        "What is the average price for each category?",
+    ],
+)
+def test_breakdown_questions_allow_many_rows(
+    detector: HallucinationDetector, question: str
+) -> None:
+    many = QueryResult(columns=["k", "n"], rows=[["a", 1], ["b", 2]], row_count=2)
+    assert detector.check_result(question, many) == []
 
 
 def test_fallback_when_scope_building_fails(
