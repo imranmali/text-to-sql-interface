@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1
 
 # ---- Build stage: produce a wheel of the text2sql package ----
-FROM python:3.12-slim AS builder
+FROM python:3.15-slim AS builder
 
 WORKDIR /build
 
@@ -13,7 +13,7 @@ COPY src/ ./src/
 RUN pip wheel --no-cache-dir --no-deps -w /dist .
 
 # ---- Runtime stage: slim image running as a non-root user ----
-FROM python:3.12-slim AS runtime
+FROM python:3.15-slim AS runtime
 
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
