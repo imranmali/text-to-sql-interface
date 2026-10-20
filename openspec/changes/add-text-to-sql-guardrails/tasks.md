@@ -2,10 +2,10 @@
 
 ## 1. Foundation
 
-- [ ] 1.1 Create `pyproject.toml`, `src/text2sql` package layout and dev tooling (ruff, pytest) and verify `pip install -e ".[dev]"` succeeds
-- [ ] 1.2 Implement shared models (`models.py`) and settings (`config.py`) and verify they import and serialize to JSON
-- [ ] 1.3 Implement schema introspection (`schema.py`) and the sample database (`sample_db.py`) and verify with `tests/test_schema.py`
-- [ ] 1.4 Define the `LLMProvider` protocol (`llm/base.py`) and verify it imports
+- [x] 1.1 Create `pyproject.toml`, `src/text2sql` package layout and dev tooling (ruff, pytest) and verify `pip install -e ".[dev]"` succeeds
+- [x] 1.2 Implement shared models (`models.py`) and settings (`config.py`) and verify they import and serialize to JSON
+- [x] 1.3 Implement schema introspection (`schema.py`) and the sample database (`sample_db.py`) and verify with `tests/test_schema.py`
+- [x] 1.4 Define the `LLMProvider` protocol (`llm/base.py`) and verify it imports
 
 ## 2. Input guardrails
 
