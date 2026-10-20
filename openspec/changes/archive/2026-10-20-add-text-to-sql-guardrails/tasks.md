@@ -39,8 +39,8 @@
 
 ## 7. Delivery
 
-- [ ] 7.1 Add `ci.yml` (lint, tests with coverage on 3.11-3.13, OpenSpec validate, Docker build) and verify it passes on the pull request
-- [ ] 7.2 Add `Dockerfile` and `release.yml` publishing to GHCR and verify the image builds locally or in CI
+- [x] 7.1 Add `ci.yml` (lint, tests with coverage on 3.11-3.13, OpenSpec validate, Docker build) and verify it passes on the pull request
+- [x] 7.2 Add `Dockerfile` and `release.yml` publishing to GHCR and verify the image builds locally or in CI
 - [x] 7.3 Add `README.md`, `LICENSE` (MIT) and `CONTRIBUTING.md` and verify README commands run as written
 - [x] 7.4 Run the full suite (`ruff check`, `ruff format --check`, `pytest`) and `openspec validate --strict` and verify all pass
 
