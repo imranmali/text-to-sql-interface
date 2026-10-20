@@ -42,8 +42,11 @@ class Text2SQLPipeline:
         full_schema = schema or DatabaseSchema.from_sqlite(self.settings.db_path)
         self.schema = full_schema.restrict(self.settings.allowed_tables)
         self.input_guard = InputGuardrail(max_length=self.settings.max_question_length)
+        # Only an explicit allowlist is enforced here. Without one, a table that
+        # does not exist is a grounding problem for the hallucination detector
+        # (which can trigger a corrective retry), not a policy violation.
         self.sql_guard = SQLGuardrail(
-            allowed_tables=self.schema.table_names, max_rows=self.settings.max_rows
+            allowed_tables=self.settings.allowed_tables or None, max_rows=self.settings.max_rows
         )
         self.detector = HallucinationDetector(
             self.schema, db_path=self.settings.db_path, threshold=self.settings.confidence_threshold

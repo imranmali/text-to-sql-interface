@@ -28,6 +28,8 @@ SINGLE_AGGREGATE_RE = re.compile(
     r"|what's the (total|average)|count )",
     re.IGNORECASE,
 )
+# ...unless they ask for a breakdown, which legitimately returns one row per group.
+BREAKDOWN_RE = re.compile(r"\b(per|by|for each|each|grouped|breakdown)\b", re.IGNORECASE)
 
 # Scopes allowed to see their parent's sources (correlated subqueries).
 _CORRELATED_SCOPES = (ScopeType.SUBQUERY, ScopeType.SET_OPERATION)
@@ -136,9 +138,9 @@ class HallucinationDetector:
                     severity=Severity.WARNING,
                 )
             ]
-        wants_single = bool(SINGLE_AGGREGATE_RE.search(question)) or (
-            "total number of" in question.lower()
-        )
+        wants_single = (
+            bool(SINGLE_AGGREGATE_RE.search(question)) or "total number of" in question.lower()
+        ) and not BREAKDOWN_RE.search(question)
         if wants_single and result.row_count > 1:
             return [
                 HallucinationIssue(
