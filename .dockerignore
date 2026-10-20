@@ -1,0 +1,36 @@
+# VCS and CI metadata
+.git
+.gitignore
+.github
+
+# Not needed in the image
+tests
+openspec
+.claude
+Dockerfile
+.dockerignore
+
+# Python artefacts
+__pycache__
+**/__pycache__
+*.pyc
+*.pyo
+*.egg-info
+.venv
+venv
+.pytest_cache
+.ruff_cache
+.mypy_cache
+dist
+build
+
+# Coverage
+.coverage
+.coverage.*
+coverage.xml
+htmlcov
+
+# Local data and env
+data/*.db
+.env
+*.local
